@@ -1,4 +1,3 @@
-import "./App.css";
 import MousePosition from "./components/MousePosition";
 
 function App() {
