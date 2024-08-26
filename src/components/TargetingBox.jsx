@@ -1,9 +1,9 @@
-export default function TargetingBox({ coords, isActive }) {
+export default function TargetingBox({ coords, imgSize, isActive }) {
   let active = "targeting-box";
   if (isActive) active += " active";
   const boxStyle = {
-    top: coords.y * 0.9,
-    left: coords.x * 0.9,
+    left: coords.x - 0.06 * imgSize.w,
+    top: coords.y - 0.04 * imgSize.h,
   };
   return <div className={active} style={boxStyle} id="tBox"></div>;
 }
