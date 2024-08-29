@@ -1,19 +1,15 @@
 import { useState } from "react";
-import TargetingBox from "./TargetingBox";
+import waldo from "../assets/waldo.jpg";
+import MagnifyingGlass from "./MagnifyingGlass";
 
 export default function MousePosition() {
-  const [x, setX] = useState(0);
-  const [y, sety] = useState(0);
-  const [imgWidth, setImgWidth] = useState(0);
-  const [imgHeight, setImgHeight] = useState(0);
+  const [[x, y], setXY] = useState([0, 0]);
+  const [[imgWidth, imgHeight], setImgSize] = useState([0, 0]);
   const [isActive, setIsActive] = useState(false);
+  const [showMagnifier, setShowMagnifier] = useState(false);
 
-  const position = (e) => {
-    setX(e.nativeEvent.offsetX);
-    sety(e.nativeEvent.offsetY);
+  const handleClick = (e) => {
     console.log(e.pageX);
-    setImgWidth(e.target.clientWidth);
-    setImgHeight(e.target.clientHeight);
     !isActive ? setIsActive(true) : null;
   };
 
@@ -21,11 +17,30 @@ export default function MousePosition() {
     <>
       <div>X Position: {x}</div>
       <div>Y Position: {y}</div>
-      <div className="image" onClick={position}>
-        <TargetingBox
-          coords={{ x: x, y: y }}
-          imgSize={{ h: imgHeight, w: imgWidth }}
-          isActive={isActive}
+      <div className="image" onClick={handleClick}>
+        <img
+          src={waldo}
+          onMouseEnter={(e) => {
+            const elem = e.currentTarget;
+            const { width, height } = elem.getBoundingClientRect();
+            setImgSize([width, height]);
+            setShowMagnifier(true);
+          }}
+          onMouseMove={(e) => {
+            const x = e.nativeEvent.offsetX;
+            const y = e.nativeEvent.offsetY;
+            setXY([x, y]);
+          }}
+          onMouseLeave={() => {
+            setShowMagnifier(false);
+          }}
+          alt={"img"}
+        />
+        <MagnifyingGlass
+          showMagnifier={showMagnifier}
+          coords={{ x, y }}
+          src={waldo}
+          imgSize={{ w: imgWidth, h: imgHeight }}
         />
       </div>
     </>
