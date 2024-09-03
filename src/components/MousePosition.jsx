@@ -1,5 +1,5 @@
 import { useState } from "react";
-import waldo from "../assets/waldo.jpg";
+import waldo from "../assets/waldo2.jpg";
 import MagnifyingGlass from "./MagnifyingGlass";
 
 export default function MousePosition() {
