@@ -5,25 +5,20 @@ import MagnifyingGlass from "./MagnifyingGlass";
 export default function MousePosition() {
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setImgSize] = useState([0, 0]);
-  const [isActive, setIsActive] = useState(false);
   const [showMagnifier, setShowMagnifier] = useState(false);
+  const [[xRatio, yRatio], setXYRatio] = useState([0, 0]);
 
-  const handleClick = (e) => {
-    console.log(e.pageX);
-    !isActive ? setIsActive(true) : null;
+  const handleClick = () => {
+    setXYRatio([x / imgWidth, y / imgHeight]);
   };
 
   return (
     <>
-      <div>X Position: {x}</div>
-      <div>Y Position: {y}</div>
       <div className="image" onClick={handleClick}>
         <img
           src={waldo}
           onMouseEnter={(e) => {
-            const elem = e.currentTarget;
-            const { width, height } = elem.getBoundingClientRect();
-            setImgSize([width, height]);
+            setImgSize([e.target.clientWidth, e.target.clientHeight]);
             setShowMagnifier(true);
           }}
           onMouseMove={(e) => {
@@ -43,6 +38,10 @@ export default function MousePosition() {
           imgSize={{ w: imgWidth, h: imgHeight }}
         />
       </div>
+      <div>Offset X Position: {x}</div>
+      <div>Offset Y Position: {y}</div>
+      <div>X Ratio: {xRatio}</div>
+      <div>Y Ratio: {yRatio}</div>
     </>
   );
 }
