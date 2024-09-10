@@ -8,12 +8,15 @@ export default function MousePosition() {
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [[xRatio, yRatio], setXYRatio] = useState([0, 0]);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setXYRatio([x / imgWidth, y / imgHeight]);
+    setImgSize([e.target.clientWidth, e.target.clientHeight]);
+    setShowMagnifier(true);
   };
 
   return (
-    <>
+    <div className="wrapper">
+      <h2>Where&apos;s Waldo?</h2>
       <div className="image" onClick={handleClick}>
         <img
           src={waldo}
@@ -42,6 +45,7 @@ export default function MousePosition() {
       <div>Offset Y Position: {y}</div>
       <div>X Ratio: {xRatio}</div>
       <div>Y Ratio: {yRatio}</div>
-    </>
+      <div>Img Width: {imgWidth}</div>
+    </div>
   );
 }

@@ -4,7 +4,11 @@ export default function MagnifyingGlass({
   src,
   imgSize,
 }) {
-  const [magHeight, magWidth, zoomLevel] = [100, 100, 3];
+  const [magHeight, magWidth, zoomLevel] = [
+    100,
+    100,
+    imgSize.w < 500 ? 4 : imgSize.w > 1000 ? 2 : 3,
+  ];
   return (
     <div
       style={{

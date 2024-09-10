@@ -1,13 +1,16 @@
 body {
   margin: 0;
   padding: 0;
+}
+
+.wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .image {
-  width: 90vw;
   position: relative;
 }
 
@@ -26,7 +29,7 @@ body {
 }
 
 img {
+  max-width: 90vw;
   border: 2px solid black;
-  width: 100%;
   height: auto;
 }
