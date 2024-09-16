@@ -1,17 +1,20 @@
 import { useState } from "react";
 import waldo from "../assets/waldo2.jpg";
 import MagnifyingGlass from "./MagnifyingGlass";
+import DropDown from "./DropDown";
 
 export default function MousePosition() {
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setImgSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [[xRatio, yRatio], setXYRatio] = useState([0, 0]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleClick = (e) => {
     setXYRatio([x / imgWidth, y / imgHeight]);
     setImgSize([e.target.clientWidth, e.target.clientHeight]);
     setShowMagnifier(true);
+    setShowDropdown(true);
   };
 
   return (
@@ -40,6 +43,7 @@ export default function MousePosition() {
           src={waldo}
           imgSize={{ w: imgWidth, h: imgHeight }}
         />
+        <DropDown showDropdown={showDropdown} coords={{ x, y }} />
       </div>
       <div>Offset X Position: {x}</div>
       <div>Offset Y Position: {y}</div>
