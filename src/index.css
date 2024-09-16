@@ -33,3 +33,14 @@ img {
   border: 2px solid black;
   height: auto;
 }
+
+.modalDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.modal {
+  padding: 0;
+  margin: 0;
+}

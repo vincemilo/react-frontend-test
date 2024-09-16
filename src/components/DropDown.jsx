@@ -1,17 +1,19 @@
-export default function DropDown({ showDropdown, coords }) {
-  console.log(showDropdown);
+export default function DropDown({ showDropdown, coords, modal }) {
   return (
     <dialog
+      ref={modal}
+      className="modal"
       style={{
-        display: showDropdown ? "" : "none",
-        position: "absolute",
         top: `${coords.y}px`,
         left: `${coords.x}px`,
       }}
     >
-      <select>
-        <option>Waldo</option>
-      </select>
+      <div className="modalDiv">
+        Who do you see?
+        <select>
+          <option>Waldo</option>
+        </select>
+      </div>
     </dialog>
   );
 }
