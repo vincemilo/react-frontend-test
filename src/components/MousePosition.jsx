@@ -8,16 +8,18 @@ export default function MousePosition() {
   const [[imgWidth, imgHeight], setImgSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [[xRatio, yRatio], setXYRatio] = useState([0, 0]);
-  const [showDropdown, setShowDropdown] = useState(false);
   const modal = useRef(null);
+  const [selection, setSelection] = useState(null);
 
   const handleClick = (e) => {
     setXYRatio([x / imgWidth, y / imgHeight]);
-    // setImgSize([e.target.clientWidth, e.target.clientHeight]);
-    // setShowMagnifier(true);
-    setShowDropdown(true);
-    modal.current.showModal();
+    if (!modal.current.open) modal.current.showModal();
     if (e.target.className === "modal") modal.current.close();
+    if (e.target.className === "option") modal.current.close();
+  };
+
+  const handleChange = (e) => {
+    setSelection(e.target.value);
   };
 
   return (
@@ -46,13 +48,14 @@ export default function MousePosition() {
           src={waldo}
           imgSize={{ w: imgWidth, h: imgHeight }}
         />
-        <DropDown showDropdown={showDropdown} coords={{ x, y }} modal={modal} />
+        <DropDown modal={modal} coords={{ x, y }} handleChange={handleChange} />
       </div>
       <div>Offset X Position: {x}</div>
       <div>Offset Y Position: {y}</div>
       <div>X Ratio: {xRatio}</div>
       <div>Y Ratio: {yRatio}</div>
       <div>Img Width: {imgWidth}</div>
+      <div>Selection: {selection}</div>
     </div>
   );
 }

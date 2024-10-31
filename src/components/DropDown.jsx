@@ -1,4 +1,4 @@
-export default function DropDown({ showDropdown, coords, modal }) {
+export default function DropDown({ coords, modal, handleChange }) {
   return (
     <dialog
       ref={modal}
@@ -10,8 +10,22 @@ export default function DropDown({ showDropdown, coords, modal }) {
     >
       <div className="modalDiv">
         Who do you see?
-        <select>
-          <option>Waldo</option>
+        <select onChange={handleChange}>
+          <option className="option" value={null}>
+            Select:
+          </option>
+          <option className="option" value="waldo">
+            Waldo
+          </option>
+          <option className="option" value="wilma">
+            Wilma
+          </option>
+          <option className="option" value="wizard">
+            The Wizard
+          </option>
+          <option className="option" value="odlaw">
+            Odlaw
+          </option>
         </select>
       </div>
     </dialog>
